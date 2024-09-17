@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
@@ -21,9 +23,12 @@ public class MovieDTO {
 
 //    List<Genres> genresList;
 
-    private String[] origin_country;
+//    private String[] origin_country;
+    // better with list than array
+    private List<String> origin_country;
 
-//    private Credits credits;
+
+    //    private Credits credits;
 
 
 //    public class Credits {

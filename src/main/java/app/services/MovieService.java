@@ -51,7 +51,7 @@ public class MovieService {
             // Check the status code and print the response
             if (response.statusCode() == 200) {
                 String body = response.body();
-//                System.out.println(body);
+//
                 MovieAPIResponse movieAPIResponse = om.readValue(body, MovieAPIResponse.class);
                 List<MovieID> movieIDs = movieAPIResponse.getMovies();
                 MovieDTO movieDTO = getAllDetailMovies(movieIDs.get(0).getId());
