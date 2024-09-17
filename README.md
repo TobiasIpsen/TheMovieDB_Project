@@ -11,7 +11,7 @@ Retrieve information about movies, genres, actors, and directors.
 1. All danish movies released in the last 5 years. (Around 1146 movies in total)
 2. See a list of all movies pulled fro the DB.
 3. See a list of all actors and directors that were part of a movie.
-4. See a list of all genres for a movie.
+4. See a list of all genres for a movie and also be able to see a list all movies within a particular genre.
 5. Able to update and delete movies from DB. Not necessarily all fields, but at least the title and the release date.
 6. Search movie by title. Search should be case insensitive and return all movies that contain the search string in the title.
 7. Total average rating of all movies in the DB. Top 10 lowest and highest rated movies, and top 10 most popular movies.
