@@ -1,5 +1,8 @@
 package config;
 
+import app.entities.Actor;
+import app.entities.Director;
+import app.entities.Movie;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.NoArgsConstructor;
 import org.hibernate.SessionFactory;
@@ -81,6 +84,9 @@ public class HibernateConfig {
 //        configuration.addAnnotatedClass(Package.class);
 //        configuration.addAnnotatedClass(Person.class);
 //        configuration.addAnnotatedClass(Address.class);
+        configuration.addAnnotatedClass(Movie.class);
+        configuration.addAnnotatedClass(Actor.class);
+        configuration.addAnnotatedClass(Director.class);
 
 
 

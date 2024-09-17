@@ -21,13 +21,14 @@ public class MovieDTO {
 
     private String release_date;
 
-//    List<Genres> genresList;
+
 
 //    private String[] origin_country;
-    // better with list than array
+    // better with list than array when mapping. cuz of the flexibilty in List
     private List<String> origin_country;
 
 
+    //    List<Genres> genresList;
     //    private Credits credits;
 
 
