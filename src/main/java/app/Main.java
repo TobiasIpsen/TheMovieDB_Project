@@ -17,15 +17,14 @@ public class Main {
 
 
 //        List<Integer> ids = movieService.getMovieIds();
-        List<MovieDTO> movies = movieService.getAllMovieDetails();
-
-
 //        System.out.println(ids);
 //        System.out.println(ids.size());
 
+
+        List<MovieDTO> movies = movieService.getAllMovieDetails();
         System.out.println(movies);
 
-//        movieDAO.persistList(movies);
+        movieDAO.persistList(movies);
 //        List<MovieDTO> movieList = getAllDetailMovies(ids);
 
 //        movieMapper.fromDTOtoEntity(movie);

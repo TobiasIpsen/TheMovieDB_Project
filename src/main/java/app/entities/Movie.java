@@ -1,5 +1,6 @@
 package app.entities;
 
+import app.dtos.MovieDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,9 +32,10 @@ public class Movie {
     @Column(name = "release_date")
     private String releaseDate;
 
-    public Movie(List<String> originCountry, String title, String releaseDate) {
-        this.originCountry = originCountry;
-        this.title = title;
-        this.releaseDate = releaseDate;
+
+    public Movie(MovieDTO movieDTO) {
+        this.originCountry = movieDTO.getOriginCountry();
+        this.title = movieDTO.getTitle();
+        this.releaseDate = movieDTO.getReleaseDate();
     }
 }

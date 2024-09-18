@@ -18,9 +18,7 @@ public class MovieService {
 
         String apiKey = System.getenv("API_KEY");
         ObjectMapper om = new ObjectMapper();
-//        List<MovieDTO> movieDTOList = null;
         List<Integer> ids = new ArrayList<>();
-
 
         int pages = Integer.MAX_VALUE;
 
@@ -30,7 +28,6 @@ public class MovieService {
                 HttpClient client = HttpClient.newHttpClient();
 
                 // Create a request
-
                 HttpRequest request = HttpRequest.newBuilder()
                         .version(HttpClient.Version.HTTP_1_1)
                         .uri(new URI("https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&page=" + i + "&primary_release_date.gte=2019-09-17&sort_by=popularity.desc&with_origin_country=DK&api_key=" + apiKey))
@@ -40,11 +37,9 @@ public class MovieService {
                 // Send the request and get the response
                 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-
                 // Check the status code and print the response
                 if (response.statusCode() == 200) {
                     String body = response.body();
-//
                     MovieAPIResponse movieAPIResponse = om.readValue(body, MovieAPIResponse.class);
                     pages = movieAPIResponse.getTotal_pages();
                     List<MovieID> movieIDs = movieAPIResponse.getMovies();
@@ -52,9 +47,6 @@ public class MovieService {
                     for (MovieID movieID : movieIDs) {
                         ids.add(movieID.getId());
                     }
-
-//                MovieDTO[] movieDTO = om.readValue(body, MovieDTO[].class);
-//                return movieDTO;
                 } else {
                     System.out.println("GET request failed. Status code: " + response.statusCode());
                 }
@@ -90,14 +82,11 @@ public class MovieService {
                 // Send the request and get the response
                 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-
                 // Check the status code and print the response
                 if (response.statusCode() == 200) {
                     String body = response.body();
-//                System.out.println(body);
                     MovieDTO movieDTO = om.readValue(body, MovieDTO.class);
                     movieList.add(movieDTO);
-
                 } else {
                     System.out.println("GET request failed. Status code: " + response.statusCode());
                 }
@@ -105,9 +94,7 @@ public class MovieService {
                 e.printStackTrace();
             }
         }
-
         return movieList;
-
     }
 
 }// end class
