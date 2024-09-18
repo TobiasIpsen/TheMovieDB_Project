@@ -1,9 +1,14 @@
 package app.services;
 
+import app.daos.MovieDAO;
 import app.dtos.MovieAPIResponse;
 import app.dtos.MovieDTO;
 import app.dtos.MovieID;
+import app.entities.Movie;
+import app.mappers.MovieMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import config.HibernateConfig;
+import jakarta.persistence.EntityManagerFactory;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -16,14 +21,20 @@ public class MovieService {
 
     public static void main(String[] args) {
 
+        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig(false);
+
         MovieService movieService = new MovieService();
+        Movie movieEntity = new Movie();
+        MovieDAO movieDAO = MovieDAO.getInstance(emf);
 
 //        List<MovieID> allMovies = movieService.getAPImovieDTO();
 //        System.out.println(allMovies);
 
         MovieDTO movie = movieService.getAPImovieDTO();
+        System.out.println("------------ the movie from api -----------");
         System.out.println(movie);
-
+//        movieMapper.fromDTOtoEntity(movie);
+        movieDAO.persistDTOasEntity(movie);
     }
 
     public MovieDTO getAPImovieDTO() {
@@ -51,7 +62,7 @@ public class MovieService {
             // Check the status code and print the response
             if (response.statusCode() == 200) {
                 String body = response.body();
-//                System.out.println(body);
+//
                 MovieAPIResponse movieAPIResponse = om.readValue(body, MovieAPIResponse.class);
                 List<MovieID> movieIDs = movieAPIResponse.getMovies();
                 MovieDTO movieDTO = getAllDetailMovies(movieIDs.get(0).getId());

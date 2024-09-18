@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
@@ -16,14 +18,18 @@ public class MovieDTO {
 
     @JsonProperty("original_title")
     private String title;
+    @JsonProperty("release_date")
+    private String releaseDate;
 
-    private String release_date;
 
-//    List<Genres> genresList;
+    //    private String[] origin_country;
+    // better with list than array when mapping. cuz of the flexibilty in List
+    @JsonProperty("origin_country")
+    private List<String> originCountry;
 
-    private String[] origin_country;
 
-//    private Credits credits;
+    //    List<Genres> genresList;
+    //    private Credits credits;
 
 
 //    public class Credits {
