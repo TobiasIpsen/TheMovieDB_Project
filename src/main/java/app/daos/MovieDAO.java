@@ -6,6 +6,8 @@ import app.mappers.MovieMapper;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
+import java.util.List;
+
 public class MovieDAO {
 
     private static MovieDAO instance;
@@ -32,7 +34,6 @@ public void persistEntity(Movie entity) {
 }
 
     public void persistDTOasEntity(MovieDTO dto) {
-
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
 
@@ -42,7 +43,13 @@ public void persistEntity(Movie entity) {
             em.getTransaction().commit();
 
         }
+    }
 
+
+    public void persistList(List<MovieDTO> dto) {
+        for (MovieDTO movieDTO : dto) {
+            persistDTOasEntity(movieDTO);
+        }
     }
 
 
