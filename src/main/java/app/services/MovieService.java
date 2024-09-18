@@ -64,13 +64,13 @@ public class MovieService {
 
         String apiKey = System.getenv("API_KEY");
         ObjectMapper om = new ObjectMapper();
-//        List<MovieDTO> movieDTOList = null;
-//        int idNumber ;
+        List<MovieDTO> movieList = new ArrayList<>();
+        HttpClient client = HttpClient.newHttpClient();
 
-        try {
-            // Create an HttpClient instance
-            HttpClient client = HttpClient.newHttpClient();
 
+        for (int i = 0; i < idList.size(); i++) {
+            try {
+                // Create an HttpClient instance
                 // Create a request
 
                 HttpRequest request = HttpRequest.newBuilder()
