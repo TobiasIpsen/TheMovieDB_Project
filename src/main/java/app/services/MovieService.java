@@ -24,7 +24,6 @@ public class MovieService {
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig(false);
 
         MovieService movieService = new MovieService();
-        MovieMapper movieMapper = new MovieMapper();
         Movie movieEntity = new Movie();
         MovieDAO movieDAO = MovieDAO.getInstance(emf);
 

@@ -8,12 +8,13 @@ import java.util.List;
 
 public class MovieMapper {
 
-    public Movie fromDTOtoEntity(MovieDTO movieDTO) {
+
+    public static Movie fromDTOtoEntity(MovieDTO movieDTO) {
         Movie movie = new Movie();
-        List<String> originCountryList = movie.getOriginCountry();
+
         return new Movie(
-                originCountryList,
-                movieDTO.getRelease_date(),
+                movieDTO.getOriginCountry(),
+                movieDTO.getReleaseDate(),
                 movieDTO.getTitle());
 
     }

@@ -18,14 +18,14 @@ public class MovieDTO {
 
     @JsonProperty("original_title")
     private String title;
+    @JsonProperty("release_date")
+    private String releaseDate;
 
-    private String release_date;
 
-
-
-//    private String[] origin_country;
+    //    private String[] origin_country;
     // better with list than array when mapping. cuz of the flexibilty in List
-    private List<String> origin_country;
+    @JsonProperty("origin_country")
+    private List<String> originCountry;
 
 
     //    List<Genres> genresList;

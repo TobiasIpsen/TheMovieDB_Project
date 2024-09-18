@@ -20,7 +20,6 @@ public class MovieDAO {
 
     }
 
-
 public void persistEntity(Movie entity) {
 
         try (EntityManager em = emf.createEntityManager()) {
@@ -37,8 +36,8 @@ public void persistEntity(Movie entity) {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
 
-            MovieMapper movieMapper = new MovieMapper();
-            Movie entity = movieMapper.fromDTOtoEntity(dto);
+//            MovieMapper movieMapper = new MovieMapper(); dont need to make this instance when our method is static.
+            Movie entity = MovieMapper.fromDTOtoEntity(dto);
             em.persist(entity);
             em.getTransaction().commit();
 

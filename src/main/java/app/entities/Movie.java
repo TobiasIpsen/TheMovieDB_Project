@@ -22,6 +22,7 @@ public class Movie {
 
     @Column(name = "origin_country")
     @ElementCollection
+//    @CollectionTable( more info if needed name, join colun ect. )
     private List<String> originCountry;
 
     @Column(name = "title")
