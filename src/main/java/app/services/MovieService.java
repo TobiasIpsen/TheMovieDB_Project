@@ -66,7 +66,9 @@ public class MovieService {
     }
 
 
-    public List<MovieDTO> getAllDetailMovies(List<Integer> id) {
+    public List<MovieDTO> getAllMovieDetails() {
+
+        List<Integer> idList = getMovieIds();
 
         String apiKey = System.getenv("API_KEY");
         ObjectMapper om = new ObjectMapper();
@@ -81,7 +83,7 @@ public class MovieService {
 
                 HttpRequest request = HttpRequest.newBuilder()
                         .version(HttpClient.Version.HTTP_1_1)
-                        .uri(new URI("https://api.themoviedb.org/3/movie/" + id.get(i) + "?language=en-US&append_to_response=credits&api_key=" + apiKey))
+                        .uri(new URI("https://api.themoviedb.org/3/movie/" + idList.get(i) + "?language=en-US&append_to_response=credits&api_key=" + apiKey))
                         .GET()
                         .build();
 

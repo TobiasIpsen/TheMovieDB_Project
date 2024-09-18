@@ -16,11 +16,14 @@ public class Main {
         MovieDAO movieDAO = MovieDAO.getInstance(emf);
 
 
-        List<Integer> ids = movieService.getMovieIds();
+//        List<Integer> ids = movieService.getMovieIds();
+        List<MovieDTO> movies = movieService.getAllMovieDetails();
 
 
-        System.out.println(ids);
-        System.out.println(ids.size());
+//        System.out.println(ids);
+//        System.out.println(ids.size());
+
+        System.out.println(movies);
 
 //        movieDAO.persistList(movies);
 //        List<MovieDTO> movieList = getAllDetailMovies(ids);
