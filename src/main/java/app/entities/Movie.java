@@ -33,10 +33,13 @@ public class Movie {
     @Column(name = "release_date")
     private String releaseDate;
 
+//    @ManyToMany(mappedBy = "movieList", cascade = CascadeType.PERSIST)
+//    private List<Actor> actors;
+
 
     public Movie(MovieDTO movieDTO) {
         this.originCountry = movieDTO.getOriginCountry();
         this.title = movieDTO.getTitle();
         this.releaseDate = movieDTO.getReleaseDate();
     }
-}
+}// end class
