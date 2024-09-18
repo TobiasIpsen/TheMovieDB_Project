@@ -1,6 +1,5 @@
 package app.dtos;
 
-import app.entities.Actor;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
@@ -27,18 +26,34 @@ public class MovieDTO {
     @JsonProperty("origin_country")
     private List<String> originCountry;
 
+    List<Genres> genresList;
 
-    //    List<Genres> genresList;
-    //    private Credits credits;
-
-
-//    public class Credits {
-//        private List<Actor> cast;
-//    }
+    @JsonProperty("credits")
+    private Credits credits;
 
 
-//    public class Genres {
-//        private String name;
-//    }
+
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @ToString
+    @Setter
+    @Getter
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public class Credits {
+
+        @JsonProperty("cast")
+        private List<ActorDTO> cast;
+    }
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @ToString
+    @Setter
+    @Getter
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public class Genres {
+        private String name;
+    }
 
 }

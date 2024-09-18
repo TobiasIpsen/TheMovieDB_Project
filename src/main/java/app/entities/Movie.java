@@ -1,5 +1,6 @@
 package app.entities;
 
+import app.dtos.ActorDTO;
 import app.dtos.MovieDTO;
 import jakarta.persistence.*;
 import lombok.*;
@@ -19,7 +20,7 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
-    private long id;
+    private int id;
 
     @Column(name = "origin_country")
     @ElementCollection

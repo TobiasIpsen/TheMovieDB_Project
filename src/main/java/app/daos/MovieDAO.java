@@ -22,17 +22,6 @@ public class MovieDAO {
 
     }
 
-public void persistEntity(Movie entity) {
-
-        try (EntityManager em = emf.createEntityManager()) {
-            em.getTransaction().begin();
-            em.persist(entity);
-            em.getTransaction().commit();
-
-        }
-
-}
-
     public void persistDTOasEntity(MovieDTO dto) {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
