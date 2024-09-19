@@ -38,4 +38,8 @@ public class Cast {
         this.department = castDTO.getDepartment();
         this.character = castDTO.getCharacter();
     }
+
+    public void addMovieToList(Movie movie) {
+        movieList.add(movie);
+    }
 }

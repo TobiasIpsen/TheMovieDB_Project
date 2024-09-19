@@ -1,10 +1,12 @@
 package app.daos;
 
 import app.dtos.MovieDTO;
+import app.entities.Cast;
 import app.entities.Movie;
 import app.mappers.Mapper;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 
@@ -26,9 +28,22 @@ public class MovieDAO {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
 
-//            MovieMapper movieMapper = new MovieMapper(); dont need to make this instance when our method is static.
-            Movie entity = Mapper.fromDTOtoEntity(dto);
-            em.persist(entity);
+            Movie movie = Mapper.fromDTOtoEntity(dto);
+            List<Cast> casts = movie.getCasts();
+
+            for (Cast cast : casts) {
+                TypedQuery<Cast> query = em.createQuery("SELECT c FROM Cast c WHERE castID = :id", Cast.class);
+                query.setParameter("id", cast.getCastID());
+                Cast foundCast = query.getSingleResult();
+
+                cast.addMovieToList(new Movie(movie));
+
+                if (cast != foundCast) {
+                    em.persist(cast);
+                }
+            }
+
+            em.persist(movie);
             em.getTransaction().commit();
 
         }
@@ -40,7 +55,6 @@ public class MovieDAO {
             persistDTOasEntity(movieDTO);
         }
     }
-
 
 
 }// end class

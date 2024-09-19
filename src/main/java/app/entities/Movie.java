@@ -34,7 +34,8 @@ public class Movie {
     @Column(name = "release_date")
     private String releaseDate;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+//    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany
     private List<Cast> casts;
 
     public Movie(MovieDTO movieDTO) {
