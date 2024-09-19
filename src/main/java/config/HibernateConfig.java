@@ -45,6 +45,8 @@ public class HibernateConfig {
         } catch (Throwable ex) {
             System.err.println("Initial SessionFactory creation failed." + ex);
             throw new ExceptionInInitializerError(ex);
+        } finally {
+            System.setErr(originalErr);
         }
     }
 
@@ -64,8 +66,6 @@ public class HibernateConfig {
         } catch (Throwable ex) {
             System.err.println("Initial SessionFactory creation failed." + ex);
             throw new ExceptionInInitializerError(ex);
-        } finally {
-            System.setErr(originalErr);
         }
     }
 
@@ -93,11 +93,6 @@ public class HibernateConfig {
         configuration.addAnnotatedClass(Movie.class);
         configuration.addAnnotatedClass(Cast.class);
         configuration.addAnnotatedClass(Crew.class);
-
-
-
-
-
 
 
     }

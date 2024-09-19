@@ -31,33 +31,27 @@ public class MovieDAO {
             Movie movie = Mapper.fromDTOtoEntity(dto);
 
             List<Cast> casts = movie.getCasts();
-            persistCast(casts, movie);
+            persistCast(casts, movie, em);
 
             em.persist(movie);
             em.getTransaction().commit();
         }
     }
 
-    public void persistCast (List<Cast> casts, Movie movie) {
-        try (EntityManager em = emf.createEntityManager()) {
-            for (Cast cast : casts) {
-                em.getTransaction().begin();
+    public void persistCast(List<Cast> casts, Movie movie, EntityManager em) {
+        for (Cast cast : casts) {
 
-                TypedQuery<Cast> query = em.createQuery("SELECT c FROM Cast c WHERE c.castID = :id", Cast.class);
-                query.setParameter("id", cast.getCastID());
-                List<Cast> castList = query.getResultList();
+            TypedQuery<Cast> query = em.createQuery("SELECT c FROM Cast c WHERE c.castID = :id", Cast.class);
+            query.setParameter("id", cast.getCastID());
+            List<Cast> castList = query.getResultList();
 
-                if (castList.isEmpty()) {
-                    cast.addMovieToList(movie);
-                    em.persist(cast);
-                } else {
-                    Cast foundCast = castList.get(0);
-                    foundCast.addMovieToList(movie);
-                    em.merge(foundCast);
-                }
-
-                em.getTransaction().commit();
-                em.close();
+            if (castList.isEmpty()) {
+                cast.addMovieToList(movie);
+                em.persist(cast);
+            } else {
+                Cast foundCast = castList.get(0);
+                foundCast.addMovieToList(movie);
+                em.persist(foundCast);
             }
         }
     }
