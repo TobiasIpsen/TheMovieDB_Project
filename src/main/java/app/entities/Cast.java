@@ -4,6 +4,7 @@ import app.dtos.CastDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -30,7 +31,7 @@ public class Cast {
 
     //owning side
     @ManyToMany(mappedBy = "casts")
-    private List<Movie> movieList;
+    private List<Movie> movieList = new ArrayList<>();
 
     public Cast(CastDTO castDTO) {
         this.castID = castDTO.getCastID();

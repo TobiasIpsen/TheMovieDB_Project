@@ -10,15 +10,19 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import java.io.PrintStream;
 import java.util.Properties;
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public class HibernateConfig {
 
+    static PrintStream originalErr = System.err;
+
     private static EntityManagerFactory entityManagerFactory;
 
     private static EntityManagerFactory buildEntityFactoryConfigDev() {
         try {
+            System.setErr(System.out);
             Configuration configuration = new Configuration();
 
             Properties props = new Properties();
@@ -60,6 +64,8 @@ public class HibernateConfig {
         } catch (Throwable ex) {
             System.err.println("Initial SessionFactory creation failed." + ex);
             throw new ExceptionInInitializerError(ex);
+        } finally {
+            System.setErr(originalErr);
         }
     }
 
