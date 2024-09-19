@@ -47,4 +47,11 @@ public class Movie {
                 .map(Mapper::castDTO2Entity)
                 .collect(Collectors.toList());
     }
+
+    public Movie(Movie movie) {
+        this.id = movie.id;
+        this.originCountry = movie.originCountry;
+        this.title = movie.title;
+        this.releaseDate = movie.releaseDate;
+    }
 }// end class
