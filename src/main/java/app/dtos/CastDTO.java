@@ -10,16 +10,18 @@ import lombok.*;
 @Setter
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ActorDTO {
+public class CastDTO {
 
     @JsonProperty("id")
-    private int actorID;
+    private int castID;
 
+    @JsonProperty("name")
     private String name;
 
     @JsonProperty("known_for_department")
     private String department;
 
+    @JsonProperty("character")
     private String character;
 
 }

@@ -22,7 +22,7 @@ public class MovieService {
 
         int pages = Integer.MAX_VALUE;
 
-//        for (int i = 1; i < pages; i++) {
+        for (int i = 1; i < pages; i++) {
             try {
                 // Create an HttpClient instance
                 HttpClient client = HttpClient.newHttpClient();
@@ -30,8 +30,8 @@ public class MovieService {
                 // Create a request
                 HttpRequest request = HttpRequest.newBuilder()
                         .version(HttpClient.Version.HTTP_1_1)
-//                        .uri(new URI("https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&page=" + i + "&primary_release_date.gte=2019-09-17&sort_by=popularity.desc&with_origin_country=DK&api_key=" + apiKey))
-                        .uri(new URI("https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&page1&primary_release_date.gte=2019-09-17&sort_by=popularity.desc&with_origin_country=DK&api_key=" + apiKey))
+                        .uri(new URI("https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&page=" + i + "&primary_release_date.gte=2019-09-17&sort_by=popularity.desc&with_origin_country=DK&api_key=" + apiKey))
+//                        .uri(new URI("https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&page1&primary_release_date.gte=2019-09-17&sort_by=popularity.desc&with_origin_country=DK&api_key=" + apiKey))
                         .GET()
                         .build();
 
@@ -53,7 +53,7 @@ public class MovieService {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-//            }
+            }
         }
         return ids;
     }
@@ -68,15 +68,15 @@ public class MovieService {
         HttpClient client = HttpClient.newHttpClient();
 
 
-//        for (int i = 0; i < idList.size(); i++) {
+        for (int i = 0; i < idList.size(); i++) {
             try {
                 // Create an HttpClient instance
                 // Create a request
 
                 HttpRequest request = HttpRequest.newBuilder()
                         .version(HttpClient.Version.HTTP_1_1)
-//                        .uri(new URI("https://api.themoviedb.org/3/movie/" + idList.get(i) + "?language=en-US&append_to_response=credits&api_key=" + apiKey))
-                        .uri(new URI("https://api.themoviedb.org/3/movie/" + idList.get(0) + "?language=en-US&append_to_response=credits&api_key=" + apiKey))
+                        .uri(new URI("https://api.themoviedb.org/3/movie/" + idList.get(i) + "?language=en-US&append_to_response=credits&api_key=" + apiKey))
+//                        .uri(new URI("https://api.themoviedb.org/3/movie/" + idList.get(0) + "?language=en-US&append_to_response=credits&api_key=" + apiKey))
                         .GET()
                         .build();
 
@@ -94,7 +94,7 @@ public class MovieService {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-//        }
+        }
         return movieList;
     }
 

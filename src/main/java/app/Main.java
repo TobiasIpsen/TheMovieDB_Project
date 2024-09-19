@@ -23,8 +23,8 @@ public class Main {
 
         List<MovieDTO> movies = movieService.getAllMovieDetails();
 //        System.out.println(movies);
-
         movieDAO.persistList(movies);
+
 //        List<MovieDTO> movieList = getAllDetailMovies(ids);
 
 //        movieMapper.fromDTOtoEntity(movie);

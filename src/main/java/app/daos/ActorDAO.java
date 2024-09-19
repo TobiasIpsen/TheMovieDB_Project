@@ -1,8 +1,7 @@
 package app.daos;
 
-import app.dtos.ActorDTO;
-import app.entities.Actor;
-import app.mappers.ActorMapper;
+import app.dtos.CastDTO;
+import app.entities.Cast;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
@@ -19,17 +18,17 @@ public class ActorDAO {
         return instance;
     }
 
-    public void persistActorDTO (ActorDTO actorDTO) {
+    /*public void persistActorDTO (CastDTO castDTO) {
 
         try(EntityManager em = emf.createEntityManager()) {
 
-            Actor entity = ActorMapper.actorDTOtoEntity(actorDTO);
+            Cast entity = ActorMapper.actorDTOtoEntity(castDTO);
 
             em.getTransaction().begin();
             em.persist(entity);
             em.getTransaction().commit();
         }
-    }
+    }*/
 
 
 }// end class

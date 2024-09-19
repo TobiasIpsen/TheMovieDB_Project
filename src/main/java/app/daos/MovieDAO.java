@@ -2,7 +2,7 @@ package app.daos;
 
 import app.dtos.MovieDTO;
 import app.entities.Movie;
-import app.mappers.MovieMapper;
+import app.mappers.Mapper;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
@@ -27,7 +27,7 @@ public class MovieDAO {
             em.getTransaction().begin();
 
 //            MovieMapper movieMapper = new MovieMapper(); dont need to make this instance when our method is static.
-            Movie entity = MovieMapper.fromDTOtoEntity(dto);
+            Movie entity = Mapper.fromDTOtoEntity(dto);
             em.persist(entity);
             em.getTransaction().commit();
 

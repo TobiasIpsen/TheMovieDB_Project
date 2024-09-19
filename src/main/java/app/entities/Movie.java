@@ -1,11 +1,12 @@
 package app.entities;
 
-import app.dtos.ActorDTO;
 import app.dtos.MovieDTO;
+import app.mappers.Mapper;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Entity
@@ -18,9 +19,9 @@ import java.util.List;
 public class Movie {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
-    private int id;
+    private Integer id;
 
     @Column(name = "origin_country")
     @ElementCollection
@@ -33,13 +34,16 @@ public class Movie {
     @Column(name = "release_date")
     private String releaseDate;
 
-//    @ManyToMany(mappedBy = "movieList", cascade = CascadeType.PERSIST)
-//    private List<Actor> actors;
-
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    private List<Cast> casts;
 
     public Movie(MovieDTO movieDTO) {
+        this.id = movieDTO.getId();
         this.originCountry = movieDTO.getOriginCountry();
         this.title = movieDTO.getTitle();
         this.releaseDate = movieDTO.getReleaseDate();
+        this.casts = movieDTO.getCredits().getCast().stream()
+                .map(Mapper::castDTO2Entity)
+                .collect(Collectors.toList());
     }
 }// end class

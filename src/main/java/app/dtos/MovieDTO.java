@@ -14,9 +14,12 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MovieDTO {
 
+    @JsonProperty("id")
+    private int id;
 
     @JsonProperty("original_title")
     private String title;
+
     @JsonProperty("release_date")
     private String releaseDate;
 
@@ -26,13 +29,10 @@ public class MovieDTO {
     @JsonProperty("origin_country")
     private List<String> originCountry;
 
-    List<Genres> genresList;
+//    List<Genres> genresList;
 
     @JsonProperty("credits")
     private Credits credits;
-
-
-
 
     @NoArgsConstructor
     @AllArgsConstructor
@@ -43,17 +43,21 @@ public class MovieDTO {
     public class Credits {
 
         @JsonProperty("cast")
-        private List<ActorDTO> cast;
+        private List<CastDTO> cast;
+
+
+//        @JsonProperty("crew")
+//        private List<CrewDTO> crew;
     }
 
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @ToString
-    @Setter
-    @Getter
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public class Genres {
-        private String name;
-    }
+//    @NoArgsConstructor
+//    @AllArgsConstructor
+//    @ToString
+//    @Setter
+//    @Getter
+//    @JsonIgnoreProperties(ignoreUnknown = true)
+//    public class Genres {
+//        private String name;
+//    }
 
 }
