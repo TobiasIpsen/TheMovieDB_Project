@@ -134,5 +134,15 @@ public class MovieDAO {
         }
     }
 
+    public List<Movie> allMoviesInGenre(String genre) {
+
+        try (EntityManager em = emf.createEntityManager()) {
+
+            TypedQuery<Movie> query = em.createQuery("SELECT m FROM Movie m JOIN m.genres g WHERE g.name = :genre", Movie.class);
+            query.setParameter("genre",genre);
+            return query.getResultList();
+        }
+    }
+
 
 }// end class

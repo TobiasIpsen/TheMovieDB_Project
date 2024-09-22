@@ -2,6 +2,7 @@ package app;
 
 import app.daos.MovieDAO;
 import app.dtos.MovieDTO;
+import app.entities.Movie;
 import app.services.MovieService;
 import config.HibernateConfig;
 import jakarta.persistence.EntityManagerFactory;
@@ -19,10 +20,12 @@ public class Main {
         // List of movies
 
         // Make DTO List - get all the movie details - print list - persist list
-        List<MovieDTO> movies = movieService.getAllMovieDetails();
+//        List<MovieDTO> movies = movieService.getAllMovieDetails();
 ////        System.out.println(movies);
-        movieDAO.persistList(movies);
+//        movieDAO.persistList(movies);
 
+        List<Movie> movieList = movieDAO.allMoviesInGenre("Horror");
+        System.out.println(movieList);
 
         // test CRUD methods
 //        System.out.println("------------------------ Movie at release date ----------------------");
