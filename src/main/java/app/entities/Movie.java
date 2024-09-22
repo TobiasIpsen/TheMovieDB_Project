@@ -36,6 +36,7 @@ public class Movie {
 
     //    @ManyToMany(cascade = CascadeType.PERSIST)
     @ManyToMany
+    @ToString.Exclude
     private List<Cast> casts;
 
     @ManyToMany
