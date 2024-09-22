@@ -33,11 +33,8 @@ public class MovieDAO {
 
             Movie movie = Mapper.fromDTOtoEntity(dto);
 
-//            List<Cast> casts = movie.getCasts();
-//            persistCast(casts, movie, em);
-
-//            List<Genre> genres = movie.getGenres();
-//            persistGenres(genres, em);
+            List<Cast> casts = movie.getCasts();
+            persistCast(casts, movie, em);
 
             em.persist(movie);
             em.getTransaction().commit();
@@ -45,6 +42,7 @@ public class MovieDAO {
     }
 
     public void persistCast(List<Cast> casts, Movie movie, EntityManager em) {
+
         for (Cast cast : casts) {
 
             TypedQuery<Cast> query = em.createQuery("SELECT c FROM Cast c WHERE c.castID = :id", Cast.class);
@@ -55,9 +53,9 @@ public class MovieDAO {
 //                cast.addMovieToList(movie);
                 em.persist(cast);
             } else {
-//                Cast foundCast = castList.get(0);
-//                foundCast.addMovieToList(movie);
-//                em.merge(foundCast);
+                /*Cast foundCast = castList.get(0);
+                foundCast.addMovieToList(movie);
+                em.merge(foundCast);*/
                 System.out.println(cast.getName() + " Already exists");
             }
         }
@@ -65,9 +63,10 @@ public class MovieDAO {
 
     public void persistGenres(List<Genre> genres) {
 
-        try (EntityManager em = emf.createEntityManager()){
+        try (EntityManager em = emf.createEntityManager()) {
+
             for (Genre genre : genres) {
-                if (em.find(Genre.class, genre) == null) {
+                if (em.find(Genre.class, genre.getName()) == null) {
                     em.persist(genre);
                 } else {
                     System.out.println(genre.getName() + " Already exists");
