@@ -16,19 +16,20 @@ public class Main {
         MovieDAO movieDAO = MovieDAO.getInstance(emf);
 
 
-//        List<Integer> ids = movieService.getMovieIds();
-//        System.out.println(ids);
-//        System.out.println(ids.size());
-
         // List of movies
+
+        // Make DTO List - get all the movie details - print list - persist list
         List<MovieDTO> movies = movieService.getAllMovieDetails();
-//        System.out.println(movies);
+////        System.out.println(movies);
         movieDAO.persistList(movies);
 
-//        List<MovieDTO> movieList = getAllDetailMovies(ids);
 
-//        movieMapper.fromDTOtoEntity(movie);
-        // -----------------persist movies fra DTO til Entity
-//        movieDAO.persistDTOasEntity(movie);
+        // test CRUD methods
+//        System.out.println("------------------------ Movie at release date ----------------------");
+//        movieDAO.searchForReleaseDate("2020-09-24");
+//        System.out.println("------------------------ See all movies ----------------------");
+//        movieDAO.seeAllMovies();
+
+
     }
 }

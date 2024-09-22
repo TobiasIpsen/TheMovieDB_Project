@@ -36,8 +36,8 @@ public class MovieDAO {
 //            List<Cast> casts = movie.getCasts();
 //            persistCast(casts, movie, em);
 
-            List<Genre> genres = movie.getGenres();
-            persistGenres(genres, em);
+//            List<Genre> genres = movie.getGenres();
+//            persistGenres(genres, em);
 
             em.persist(movie);
             em.getTransaction().commit();
@@ -63,32 +63,49 @@ public class MovieDAO {
         }
     }
 
-    public void persistGenres(List<Genre> genres, EntityManager em) {
+    public void persistGenres(List<Genre> genres) {
 
-        Set<Genre> genresSet = genres.stream().collect(Collectors.toSet());
-        for (Genre genre : genresSet) {
-            if (em.find(Genre.class, genre) == null) {
+        try (EntityManager em = emf.createEntityManager()){
+            for (Genre genre : genres) {
+                if (em.find(Genre.class, genre) == null) {
+                    em.persist(genre);
+                } else {
+                    System.out.println(genre.getName() + " Already exists");
+                }
+            }
+        }
+        /*for (Genre genre : genres) {
+            TypedQuery<Genre> query = em.createQuery("SELECT g FROM Genre g WHERE g.name = :genreName", Genre.class);
+            query.setParameter("genreName", genre.getName());
+            List<Genre> genreList = query.getResultList();
+
+            if (genreList.isEmpty()) {
                 em.persist(genre);
             } else {
                 System.out.println(genre.getName() + " Already exists");
             }
-        }
-
-//        for (Genre genre : genres) {
-//            TypedQuery<Genre> query = em.createQuery("SELECT g FROM Genre g WHERE g.name = :genreName", Genre.class);
-//            query.setParameter("genreName", genre.getName());
-//            List<Genre> genreList = query.getResultList();
-//
-//            if (genreList.isEmpty()) {
-//                em.persist(genre);
-//            } else {
-//                System.out.println(genre.getName() + " Already exists");
-//            }
-//        }
+        }*/
     }
 
 
     public void persistList(List<MovieDTO> dto) {
+        /*List<Movie> movieList = dto.stream()
+                .map(Mapper::fromDTOtoEntity)
+                .collect(Collectors.toList());
+
+        List<Genre> genres = movieList.stream()
+                .map(Movie::getGenres)
+                .flatMap(List::stream)
+                .collect(Collectors.toList());*/
+
+        List<Genre> genreList = dto.stream()
+                .map(Mapper::fromDTOtoEntity)
+                .map(Movie::getGenres)
+                .flatMap(List::stream)
+                .distinct()
+                .collect(Collectors.toList());
+        persistGenres(genreList);
+
         for (MovieDTO movieDTO : dto) {
             persistDTOasEntity(movieDTO);
         }
