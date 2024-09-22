@@ -20,7 +20,7 @@ public class Main {
 //        System.out.println(ids);
 //        System.out.println(ids.size());
 
-
+        // List of movies
         List<MovieDTO> movies = movieService.getAllMovieDetails();
 //        System.out.println(movies);
         movieDAO.persistList(movies);

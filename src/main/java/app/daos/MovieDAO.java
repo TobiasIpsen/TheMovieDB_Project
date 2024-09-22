@@ -94,5 +94,27 @@ public class MovieDAO {
         }
     }
 
+    public List<Movie> searchForReleaseDate(String s) {
+        try (EntityManager em = emf.createEntityManager()) {
+
+            TypedQuery<Movie> movieList = em.createQuery("SELECT m FROM Movie m WHERE m.releaseDate = :releaseDate", Movie.class);
+            movieList.setParameter("releaseDate", s);
+
+            System.out.println(movieList.getResultList());
+            return movieList.getResultList();
+        }
+    }
+
+    public List<Movie> seeAllMovies() {
+        try (EntityManager em = emf.createEntityManager()) {
+
+            TypedQuery<Movie> movieList = em.createQuery("SELECT m FROM Movie m", Movie.class);
+
+            System.out.println(movieList.getResultList());
+            return movieList.getResultList();
+
+        }
+    }
+
 
 }// end class

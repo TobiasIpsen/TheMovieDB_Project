@@ -29,7 +29,7 @@ public class Cast {
     @Column (name = "character")
     private String character;
 
-    //owning side
+
     @ManyToMany(mappedBy = "casts")
     private List<Movie> movieList = new ArrayList<>();
 
@@ -40,7 +40,11 @@ public class Cast {
         this.character = castDTO.getCharacter();
     }
 
+
+
     public void addMovieToList(Movie movie) {
         movieList.add(movie);
     }
+
+
 }
