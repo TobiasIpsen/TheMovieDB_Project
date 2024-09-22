@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 
@@ -60,5 +61,26 @@ public class Movie {
         this.originCountry = movie.originCountry;
         this.title = movie.title;
         this.releaseDate = movie.releaseDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Movie movie = (Movie) o;
+        return Objects.equals(id, movie.id) && Objects.equals(originCountry, movie.originCountry) && Objects.equals(title, movie.title) && Objects.equals(releaseDate, movie.releaseDate) && Objects.equals(casts, movie.casts) && Objects.equals(genres, movie.genres);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, originCountry, title, releaseDate, casts, genres);
+    }
+
+    public Movie(Integer id, List<String> originCountry, String title, String releaseDate, List<Genre> genres) {
+        this.id = id;
+        this.originCountry = originCountry;
+        this.title = title;
+        this.releaseDate = releaseDate;
+        this.genres = genres;
     }
 }// end class
