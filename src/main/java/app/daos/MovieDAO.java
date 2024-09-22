@@ -64,7 +64,7 @@ public class MovieDAO {
     public void persistGenres(List<Genre> genres) {
 
         try (EntityManager em = emf.createEntityManager()) {
-
+            em.getTransaction().begin();
             for (Genre genre : genres) {
                 if (em.find(Genre.class, genre.getName()) == null) {
                     em.persist(genre);
@@ -72,6 +72,7 @@ public class MovieDAO {
                     System.out.println(genre.getName() + " Already exists");
                 }
             }
+            em.getTransaction().commit();
         }
         /*for (Genre genre : genres) {
             TypedQuery<Genre> query = em.createQuery("SELECT g FROM Genre g WHERE g.name = :genreName", Genre.class);
@@ -88,7 +89,8 @@ public class MovieDAO {
 
 
     public void persistList(List<MovieDTO> dto) {
-        /*List<Movie> movieList = dto.stream()
+        /* This is the same as the single one below
+        List<Movie> movieList = dto.stream()
                 .map(Mapper::fromDTOtoEntity)
                 .collect(Collectors.toList());
 
