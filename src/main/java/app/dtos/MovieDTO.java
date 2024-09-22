@@ -29,7 +29,8 @@ public class MovieDTO {
     @JsonProperty("origin_country")
     private List<String> originCountry;
 
-//    List<Genres> genresList;
+    @JsonProperty("genres")
+    private List<GenresDTO> genresList;
 
     @JsonProperty("credits")
     private Credits credits;
@@ -50,14 +51,14 @@ public class MovieDTO {
 //        private List<CrewDTO> crew;
     }
 
-//    @NoArgsConstructor
-//    @AllArgsConstructor
-//    @ToString
-//    @Setter
-//    @Getter
-//    @JsonIgnoreProperties(ignoreUnknown = true)
-//    public class Genres {
-//        private String name;
-//    }
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @ToString
+    @Setter
+    @Getter
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class GenresDTO {
+        private String name;
+    }
 
 }

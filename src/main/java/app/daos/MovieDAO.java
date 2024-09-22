@@ -2,6 +2,7 @@ package app.daos;
 
 import app.dtos.MovieDTO;
 import app.entities.Cast;
+import app.entities.Genre;
 import app.entities.Movie;
 import app.mappers.Mapper;
 import jakarta.persistence.EntityManager;
@@ -9,6 +10,8 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class MovieDAO {
 
@@ -30,8 +33,11 @@ public class MovieDAO {
 
             Movie movie = Mapper.fromDTOtoEntity(dto);
 
-            List<Cast> casts = movie.getCasts();
-            persistCast(casts, movie, em);
+//            List<Cast> casts = movie.getCasts();
+//            persistCast(casts, movie, em);
+
+            List<Genre> genres = movie.getGenres();
+            persistGenres(genres, em);
 
             em.persist(movie);
             em.getTransaction().commit();
@@ -46,14 +52,39 @@ public class MovieDAO {
             List<Cast> castList = query.getResultList();
 
             if (castList.isEmpty()) {
-                cast.addMovieToList(movie);
+//                cast.addMovieToList(movie);
                 em.persist(cast);
             } else {
-                Cast foundCast = castList.get(0);
-                foundCast.addMovieToList(movie);
-                em.persist(foundCast);
+//                Cast foundCast = castList.get(0);
+//                foundCast.addMovieToList(movie);
+//                em.merge(foundCast);
+                System.out.println(cast.getName() + " Already exists");
             }
         }
+    }
+
+    public void persistGenres(List<Genre> genres, EntityManager em) {
+
+        Set<Genre> genresSet = genres.stream().collect(Collectors.toSet());
+        for (Genre genre : genresSet) {
+            if (em.find(Genre.class, genre) == null) {
+                em.persist(genre);
+            } else {
+                System.out.println(genre.getName() + " Already exists");
+            }
+        }
+
+//        for (Genre genre : genres) {
+//            TypedQuery<Genre> query = em.createQuery("SELECT g FROM Genre g WHERE g.name = :genreName", Genre.class);
+//            query.setParameter("genreName", genre.getName());
+//            List<Genre> genreList = query.getResultList();
+//
+//            if (genreList.isEmpty()) {
+//                em.persist(genre);
+//            } else {
+//                System.out.println(genre.getName() + " Already exists");
+//            }
+//        }
     }
 
 

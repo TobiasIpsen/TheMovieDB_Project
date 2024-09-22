@@ -34,9 +34,12 @@ public class Movie {
     @Column(name = "release_date")
     private String releaseDate;
 
-//    @ManyToMany(cascade = CascadeType.PERSIST)
+    //    @ManyToMany(cascade = CascadeType.PERSIST)
     @ManyToMany
     private List<Cast> casts;
+
+    @ManyToMany
+    private List<Genre> genres;
 
     public Movie(MovieDTO movieDTO) {
         this.id = movieDTO.getId();
@@ -45,6 +48,9 @@ public class Movie {
         this.releaseDate = movieDTO.getReleaseDate();
         this.casts = movieDTO.getCredits().getCast().stream()
                 .map(Mapper::castDTO2Entity)
+                .collect(Collectors.toList());
+        this.genres = movieDTO.getGenresList().stream()
+                .map(Mapper::genresToEntity)
                 .collect(Collectors.toList());
     }
 

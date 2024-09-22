@@ -2,6 +2,7 @@ package config;
 
 import app.entities.Cast;
 import app.entities.Crew;
+import app.entities.Genre;
 import app.entities.Movie;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.NoArgsConstructor;
@@ -93,6 +94,7 @@ public class HibernateConfig {
         configuration.addAnnotatedClass(Movie.class);
         configuration.addAnnotatedClass(Cast.class);
         configuration.addAnnotatedClass(Crew.class);
+        configuration.addAnnotatedClass(Genre.class);
 
 
     }
